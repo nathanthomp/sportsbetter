@@ -29,7 +29,7 @@ namespace SportsBetter.Library
         /// <summary>
         /// The dollar amount reward.
         /// </summary>
-        public double Reward { get { return CaculateReward(this.Odds, this.Wager); } }
+        //public double Reward { get { return CaculateReward(this.Odds, this.Wager); } }
 
         public Bet()
         {
@@ -39,9 +39,9 @@ namespace SportsBetter.Library
         //
         // TODO
         //
-        public override bool Equals(object obj)
-        {
-            return base.Equals(obj);
-        }
+        //public override bool Equals(object obj)
+        //{
+        //    return base.Equals(obj);
+        //}
     }
 }
