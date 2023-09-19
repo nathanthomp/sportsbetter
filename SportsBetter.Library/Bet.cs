@@ -5,43 +5,53 @@ namespace SportsBetter.Library
     public class Bet
     {
         /// <summary>
-        /// Calculates the bet's reward. This is calculated by
+        /// The dollar amount profit made if the bet wins. If the american odds are greater than 0,
+        /// profit = wager * (american odds / 100). Else, profit = wager / (absolute value of 
+        /// american odds / 100).
         /// </summary>
-        /// <param name="odds">The bet's odds.</param>
-        /// <param name="wager">The wager amount.</param>
-        /// <returns>Reward of this bet.</returns>
-        /// <exception cref="NotImplementedException"></exception>
-        private static double CaculateReward(int odds, double wager)
+        private static decimal CalculateProfit(int odds, decimal wager)
         {
-            throw new NotImplementedException();
+            return odds > 0 
+                ? Math.Round((wager * odds) / 100, 2)
+                : Math.Round((wager / Math.Abs(odds)) * 100, 2);
         }
 
         /// <summary>
         /// The dollar amount wager.
         /// </summary>
-        public double Wager { get; set; }
+        public decimal Wager { get; private set; }
 
         /// <summary>
         /// The american odds.
         /// </summary>
-        public int Odds { get; set; }
+        public int Odds { get; }
 
         /// <summary>
-        /// The dollar amount reward.
+        /// The dollar amount profit made if the bet wins.
         /// </summary>
-        //public double Reward { get { return CaculateReward(this.Odds, this.Wager); } }
+        public decimal Profit { get; private set; }
 
-        public Bet()
+        /// <summary>
+        /// Total payout if bet wins.
+        /// </summary>
+        public decimal Payout { get; private set; }
+
+        public Bet(int odds)
         {
-            // Ensure that odds does not equal 0
+            // American odds cannot be -99 - 99
+            this.Odds = odds; 
+            this.Wager = 10.00M;
+            this.Profit = CalculateProfit(this.Odds, this.Wager);
+            this.Payout = this.Profit + this.Wager;
         }
 
-        //
-        // TODO
-        //
-        //public override bool Equals(object obj)
-        //{
-        //    return base.Equals(obj);
-        //}
+        public void ChangeWager(decimal wager)
+        {
+            // wager must be greater that 0
+            this.Wager = wager;
+            this.Profit = CalculateProfit(this.Odds, this.Wager);
+            this.Payout = this.Profit + this.Wager;
+        }
+
     }
 }

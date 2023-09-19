@@ -6,16 +6,12 @@ namespace SportsBetter.App
     {
         static void Main(string[] args)
         {
-            var parlay = new Parlay();
+            Bet bet = new Bet(-150);
 
-            var x = 5 + 5;
+            var wager = bet.Wager;
+            var payout = bet.Payout;
 
-            //var bet = new Bet
-            //{
-            //    Odds = -150
-            //};
-
-            //parlay.AddBet(bet);
+            bet.ChangeWager(15.00M);
         }
     }
 }
