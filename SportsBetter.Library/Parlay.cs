@@ -6,35 +6,27 @@ namespace SportsBetter.Library
 {
     public class Parlay
     {
-        /// <summary>
-        /// Calculates the parlay's return. This is calculated by first converting each American odds
-        /// to decimal odds. If american odds > 0, decimal odds = (odds/100) + 1, else decimal odds
-        /// = (100 / AbsoluteValue of american odds) + 1 Multiplying all the decimal odds together. 
-        /// Then multiply the result by the wager.
-        /// </summary>
-        /// <param name="bets">Each bet in this parlay.</param>
-        /// <param name="wager">The wager amount.</param>
-        /// <returns>The return of this parlay.</returns>
-        private static decimal CaculateReturn(List<Bet> bets, decimal wager)
-        {
-            Debug.Assert(bets.Count > 0);
-            Debug.Assert(wager != 0.00M);
 
-            decimal odds, oddsIndex = 1;
-            foreach (Bet bet in bets)
-            {
-                odds = bet.Odds > 0
-                    ? Math.Round(((decimal)bet.Odds / 100) + 1, 2)
-                    : Math.Round((100 / (decimal)Math.Abs(bet.Odds)) + 1, 2);
+        //private static decimal CaculateReturn(List<Bet> bets, decimal wager)
+        //{
+        //    Debug.Assert(bets.Count > 0);
+        //    Debug.Assert(wager != 0.00M);
 
-                oddsIndex *= odds;
-            }
-            // ********************************************************
-            // oddsIndex is the number that we are looking for the most.
-            // *********************************************************
+        //    decimal odds, oddsIndex = 1;
+        //    foreach (Bet bet in bets)
+        //    {
+        //        odds = bet.Odds > 0
+        //            ? Math.Round(((decimal)bet.Odds / 100) + 1, 2)
+        //            : Math.Round((100 / (decimal)Math.Abs(bet.Odds)) + 1, 2);
 
-            return Math.Round((oddsIndex * wager), 2);
-        }
+        //        oddsIndex *= odds;
+        //    }
+        //    // ********************************************************
+        //    // oddsIndex is the number that we are looking for the most.
+        //    // *********************************************************
+
+        //    return Math.Round((oddsIndex * wager), 2);
+        //}
 
         /// <summary>
         /// Calculates the parlay's odds. This is calculated by dividing the profit by the wager. 
@@ -44,44 +36,77 @@ namespace SportsBetter.Library
         /// <param name="profit">Profit of this parlay.</param>
         /// <param name="wager">The parlay's wager.</param>
         /// <returns>The parlay's odds.</returns>
-        private static int CalculateOdds(decimal profit, decimal wager)
-        {
-            Debug.Assert(profit > 0.00M);
-            Debug.Assert(wager > 0.00M);
+        //private static int CalculateOdds(decimal profit, decimal wager)
+        //{
+        //    Debug.Assert(profit > 0.00M);
+        //    Debug.Assert(wager > 0.00M);
 
-            decimal oddsToOne = Math.Round(profit / wager, 2);
-            return oddsToOne >= 2 ? (int)((oddsToOne - 1) * 100) : (int)(-100 / (oddsToOne - 1));
-        }
+        //    decimal oddsToOne = Math.Round(profit / wager, 2);
+        //    return oddsToOne >= 2 ? (int)((oddsToOne - 1) * 100) : (int)(-100 / (oddsToOne - 1));
+        //}
 
+        /// <summary>
+        /// Calculates the parlay odds. This is calculated by first converting each american odds
+        /// to decimal odds. If american odds > 0, decimal odds = (odds/100) + 1, else decimal odds
+        /// = (100 / absolute value of american odds) + 1. Multiply all the decimal odds together.
+        /// Multiply the result by the wager. Subtract the wager. Divide by the wager. Then convert
+        /// back to american odds. If the decimal odds is greater than or equal to 2, american odds
+        /// = (decimal odds - 1) * 100. Else, american odds = -100 / (decimal odds - 1).
+        /// </summary>
+        /// <param name="bets">Each bet in this parlay.</param>
+        /// <param name="wager">The wager amount.</param>
+        /// <returns>The odds of the parlay</returns>
         private static int CalculateOdds(List<Bet> bets, decimal wager)
         {
+            if (bets.Count == 1)
+            {
+                return bets[0].Odds;
+            }
+
             decimal odds, oddsIndex = 1;
             foreach (Bet bet in bets)
             {
                 odds = bet.Odds > 0
-                    ? Math.Round(((decimal)bet.Odds / 100) + 1, 2)
-                    : Math.Round((100 / (decimal)Math.Abs(bet.Odds)) + 1, 2);
+                    ? ((decimal)bet.Odds / 100) + 1
+                    : (100 / (decimal)Math.Abs(bet.Odds)) + 1;
 
                 oddsIndex *= odds;
             }
 
-            var payout = Math.Round((oddsIndex * wager), 2);
-            var profit = payout - wager;
-            var oddsPerDollar = Math.Round(profit / wager, 2);
-            var americanOdds = oddsPerDollar >= 2 ? (int)((oddsPerDollar - 1) * 100) : (int)(-100 / (oddsPerDollar - 1));
-            return americanOdds;
+            return oddsIndex < 2 
+                ? (int)Math.Round(-100 / (oddsIndex - 1))
+                : (int)Math.Round((oddsIndex - 1) * 100);
+            //var payout = Math.Round((oddsIndex * wager), 2);
+            //var profit = payout - wager;
         }
 
         /// <summary>
-        /// Calculates the probability of this parlay winning. Calculated by (100 / american odds 
-        /// + 100) * 100.
+        /// The probability that this parlay wins. If the american odds are greater than 0,
+        /// probability = 100 / (american odds + 100). Else, probability = absolute value of 
+        /// american odds / (absolute value of american odds + 100).
         /// </summary>
-        /// <param name="odds">The odds of this parlay.</param>
-        /// <returns>The probability of this parlay winning</returns>
+        /// <param name="odds">The american odds of this parlay.</param>
+        /// <returns>The probability of this parlay.</returns>
         private static double CalculateProbability(int odds)
         {
-            Debug.Assert(odds > 0);
-            return (double)Math.Round((100 / (decimal)(odds + 100)) * 100, 2);
+            return odds > 0
+                ? Math.Round((double)100 / (double)(odds + 100), 2)
+                : Math.Round((double)Math.Abs(odds) / (double)(Math.Abs(odds) + 100), 2);
+        }
+
+        /// <summary>
+        /// The dollar amount profit made if the bet wins. If the american odds are greater than 0,
+        /// profit = wager * (american odds / 100). Else, profit = wager / (absolute value of 
+        /// american odds / 100).
+        /// </summary>
+        /// <param name="odds">The american odds of this bet.</param>
+        /// <param name="wager">The wager amount.</param>
+        /// <returns>The profit of this bet.</returns>
+        private static decimal CalculateProfit(int odds, decimal wager)
+        {
+            return odds > 0
+                ? Math.Round((wager * odds) / 100, 2)
+                : Math.Round((wager / Math.Abs(odds)) * 100, 2);
         }
 
         /// <summary>
@@ -92,88 +117,71 @@ namespace SportsBetter.Library
         /// <summary>
         /// The dollar amount wager.
         /// </summary>
-        public decimal Wager
-        {
-            get
-            {
-                return this.Wager;
-            }
-            set
-            {
-                Debug.Assert(value > 0);
-                this.Wager = value;
-            }
-        }
+        public decimal Wager { get; private set; }
 
         /// <summary>
         /// The american odds.
         /// </summary>
-        public int Odds
-        {
-            get
-            {
-                return this.Bets.Count == 1 
-                    ? this.Bets[0].Odds
-                    : CalculateOdds(this.Bets, this.Wager);
-            }
-        }
-
-        /// <summary>
-        /// The dollar amount returned if won.
-        /// </summary>
-        //public decimal Payout
-        //{ 
-        //    get 
-        //    {
-        //        return CaculateReturn(this.Bets, this.Wager); 
-        //    } 
-        //}
-
-        /// <summary>
-        /// The dollar amount profit made if won. This is calculated by the dollar amount of return
-        /// subtracted by the initial wager.
-        /// </summary>
-        //public decimal Profit 
-        //{ 
-        //    get 
-        //    {
-        //        return this.Payout - this.Wager; 
-        //    } 
-        //}
+        public int Odds { get; private set; }
 
         /// <summary>
         /// The probability that this parlay will win.
         /// </summary>
-        //public double Probability 
-        //{ 
-        //    get 
-        //    {
-        //        return CalculateProbability(this.Odds); 
-        //    } 
-        //}
+        public double Probability { get; private set; }
 
         /// <summary>
-        /// Parlay constructor. Ensures that this.Bets is not null and the initial wager is $10.00.
+        /// The dollar amount profit made if the parlay wins.
         /// </summary>
-        public Parlay()
+        public decimal Profit { get; private set; }
+
+        /// <summary>
+        /// The dollar amount returned if won.
+        /// </summary>
+        public decimal Payout { get; private set; }
+
+        /// <summary>
+        /// Parlay constructor. Ensures that bets is not null, has a size of 1, and the initial 
+        /// wager is $10.00. Initializes the odds, probability, profit, and payout of the parlay.
+        /// </summary>
+        /// <param name="bet">The intial bet in this parlay</param>
+        public Parlay(Bet bet)
         {
-            this.Bets = new List<Bet>();
+            this.Bets = new List<Bet>
+            {
+                bet
+            };
             this.Wager = 10.00M;
+            this.Odds = CalculateOdds(this.Bets, this.Wager);
+            this.Probability = CalculateProbability(this.Odds);
+            this.Profit = CalculateProfit(this.Odds, this.Wager);
+            this.Payout = this.Profit + this.Wager;
         }
 
         /// <summary>
         /// Adds a bet to this parlay. Ensures that this bet is unique in the list of bets.
         /// </summary>
-        /// <param name="bet">The bet to add to the parlay.</param>
+        /// <param name="bet">The bet to add to this parlay.</param>
         public void AddBet(Bet bet)
         {
             Debug.Assert(bet != null);
             Debug.Assert(this.Bets.Contains(bet) == false);
 
-            // Need a custom comparator here
+            // Need a custom comparator here to check if this bet has already been added to the parlay
 
             this.Bets.Add(bet);
-            // fire BetAddedEvent
+            this.Odds = CalculateOdds(this.Bets, this.Wager);
+            this.Probability = CalculateProbability(this.Odds);
+            this.Profit = CalculateProfit(this.Odds, this.Wager);
+            this.Payout = this.Profit + this.Wager;
+        }
+
+        // public void RemoveBet(Bet bet)
+
+        public void ChangeWager(decimal wager)
+        {
+            this.Wager = wager;
+            this.Profit = CalculateProfit(this.Odds, this.Wager);
+            this.Payout = this.Profit + this.Wager;
         }
     }
 }
