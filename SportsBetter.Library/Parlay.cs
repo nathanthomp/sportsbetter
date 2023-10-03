@@ -89,9 +89,13 @@ namespace SportsBetter.Library
         /// <returns>The probability of this parlay.</returns>
         private static double CalculateProbability(int odds)
         {
+            //return odds > 0
+            //    ? Math.Round((double)100 / (double)(odds + 100), 2)
+            //    : Math.Round((double)Math.Abs(odds) / (double)(Math.Abs(odds) + 100), 2);
+
             return odds > 0
-                ? Math.Round((double)100 / (double)(odds + 100), 2)
-                : Math.Round((double)Math.Abs(odds) / (double)(Math.Abs(odds) + 100), 2);
+                ? (double)100 / (double)(odds + 100)
+                : (double)Math.Abs(odds) / (double)(Math.Abs(odds) + 100);
         }
 
         /// <summary>
