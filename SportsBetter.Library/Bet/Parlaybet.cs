@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace SportsBetter.Library
+namespace SportsBetter.Library.Bet
 {
-    public class Parlay
+    // public void AddBet(StraightBet bet)
+    // private static int CalculateOdds(List<StraightBet> bets, decimal wager)
+    public class Parlaybet : IBet
     {
 
         //private static decimal CaculateReturn(List<Bet> bets, decimal wager)
@@ -56,7 +58,7 @@ namespace SportsBetter.Library
         /// <param name="bets">Each bet in this parlay.</param>
         /// <param name="wager">The wager amount.</param>
         /// <returns>The odds of the parlay</returns>
-        private static int CalculateOdds(List<Bet> bets, decimal wager)
+        private static int CalculateOdds(List<StraightBet> bets, decimal wager)
         {
             if (bets.Count == 1)
             {
@@ -64,7 +66,7 @@ namespace SportsBetter.Library
             }
 
             decimal odds, oddsIndex = 1;
-            foreach (Bet bet in bets)
+            foreach (StraightBet bet in bets)
             {
                 odds = bet.Odds > 0
                     ? ((decimal)bet.Odds / 100) + 1
@@ -116,41 +118,18 @@ namespace SportsBetter.Library
         /// <summary>
         /// The bets included in this parlay.
         /// </summary>
-        private List<Bet> Bets { get; }
+        private List<StraightBet> Bets { get; }
 
-        /// <summary>
-        /// The dollar amount wager.
-        /// </summary>
-        public decimal Wager { get; private set; }
 
-        /// <summary>
-        /// The american odds.
-        /// </summary>
-        public int Odds { get; private set; }
-
-        /// <summary>
-        /// The probability that this parlay will win.
-        /// </summary>
-        public double Probability { get; private set; }
-
-        /// <summary>
-        /// The dollar amount profit made if the parlay wins.
-        /// </summary>
-        public decimal Profit { get; private set; }
-
-        /// <summary>
-        /// The dollar amount returned if won.
-        /// </summary>
-        public decimal Payout { get; private set; }
 
         /// <summary>
         /// Parlay constructor. Ensures that bets is not null, has a size of 1, and the initial 
         /// wager is $10.00. Initializes the odds, probability, profit, and payout of the parlay.
         /// </summary>
         /// <param name="bet">The intial bet in this parlay</param>
-        public Parlay(Bet bet)
+        public Parlaybet(StraightBet bet)
         {
-            this.Bets = new List<Bet>
+            this.Bets = new List<StraightBet>
             {
                 bet
             };
@@ -165,7 +144,7 @@ namespace SportsBetter.Library
         /// Adds a bet to this parlay. Ensures that this bet is unique in the list of bets.
         /// </summary>
         /// <param name="bet">The bet to add to this parlay.</param>
-        public void AddBet(Bet bet)
+        public void AddBet(StraightBet bet)
         {
             Debug.Assert(bet != null);
             Debug.Assert(this.Bets.Contains(bet) == false);
