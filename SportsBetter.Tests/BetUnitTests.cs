@@ -10,7 +10,7 @@ namespace SportsBetter.Tests
     [TestFixture]
     public class BetUnitTests
     {
-        private Bet _bet;
+        private StraightBet _bet;
 
         [SetUp]
         public void SetUp()

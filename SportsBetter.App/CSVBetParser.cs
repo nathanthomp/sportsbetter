@@ -1,4 +1,4 @@
-﻿using SportsBetter.Library;
+﻿using SportsBetter.Library.Bet;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -16,7 +16,7 @@ namespace SportsBetter.App
             }
         }
 
-        public static List<Bet> Parse(string fileName)
+        public static List<StraightBet> Parse(string fileName)
         {
             Debug.Assert(string.IsNullOrEmpty(fileName) == false);
             Debug.Assert(fileName.EndsWith(".csv"));
