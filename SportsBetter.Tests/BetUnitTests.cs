@@ -12,20 +12,20 @@ namespace SportsBetter.Tests
     {
         private Bet _bet;
 
-        [SetUp]
-        public void SetUp()
-        {
-            _bet = new Bet
-            {
-                Wager = 1.00,
-                Odds = 100
-            };
-        }
+        //[SetUp]
+        //public void SetUp()
+        //{
+        //    _bet = new Bet
+        //    {
+        //        Wager = 1.00,
+        //        Odds = 100
+        //    };
+        //}
 
-        [Test]
-        public void BetUnitTest1()
-        {
-            Assert.Pass();
-        }
+        //[Test]
+        //public void BetUnitTest1()
+        //{
+        //    Assert.Pass();
+        //}
     }
 }
