@@ -50,6 +50,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SportsBetter.Data\SportsBetter.Data.csproj">
+      <Project>{95a2c0d9-9ba5-4c4a-9080-dd537f983edd}</Project>
+      <Name>SportsBetter.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SportsBetter.Library\SportsBetter.Library.csproj">
       <Project>{e67f2a95-3947-4ff9-a6f2-9067f3f6fcb9}</Project>
       <Name>SportsBetter.Library</Name>
