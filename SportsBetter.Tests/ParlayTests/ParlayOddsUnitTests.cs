@@ -11,7 +11,7 @@ namespace SportsBetter.Tests.ParlayTests
     [TestFixture]
     public class ParlayOddsUnitTests
     {
-        private Parlaybet _parlay;
+        //private Parlaybet _parlay;
 
         //[SetUp]
         //public void Setup()

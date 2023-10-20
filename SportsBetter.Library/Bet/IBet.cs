@@ -33,9 +33,9 @@ namespace SportsBetter.Library.Bet
         /// </summary>
         public decimal Payout;
 
-        public void ChangeWager(decimal wager);
-        private static double CalculateProbability(int odds);
-        private static decimal CalculateProfit(int odds, decimal wager);
-        public void Place();
+        //public void ChangeWager(decimal wager);
+        //private static double CalculateProbability(int odds);
+        //private static decimal CalculateProfit(int odds, decimal wager);
+        //public void Place();
     }
 }

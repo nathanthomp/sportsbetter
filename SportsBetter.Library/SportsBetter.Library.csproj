@@ -45,10 +45,12 @@
     <Compile Include="Bet\StraightBet.cs" />
     <Compile Include="Bet\IBet.cs" />
     <Compile Include="Bet\Parlaybet.cs" />
+    <Compile Include="Game\NFLGame.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Exceptions\" />
+    <Folder Include="Team\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
