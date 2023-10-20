@@ -41,8 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bet.cs" />
-    <Compile Include="Parlay.cs" />
+    <Compile Include="Bet\BetBase.cs" />
+    <Compile Include="Bet\StraightBet.cs" />
+    <Compile Include="Bet\IBet.cs" />
+    <Compile Include="Bet\Parlaybet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

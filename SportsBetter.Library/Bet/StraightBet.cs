@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace SportsBetter.Library
+namespace SportsBetter.Library.Bet
 {
-    public class Bet
+    public class StraightBet : IBet
     {
         /// <summary>
         /// The dollar amount profit made if the bet wins. If the american odds are greater than 0,
@@ -35,36 +35,11 @@ namespace SportsBetter.Library
         }
 
         /// <summary>
-        /// The dollar amount wager.
-        /// </summary>
-        public decimal Wager { get; private set; }
-
-        /// <summary>
-        /// The american odds.
-        /// </summary>
-        public int Odds { get; }
-
-        /// <summary>
-        /// The probability that this parlay will win.
-        /// </summary>
-        public double Probability { get; private set; }
-
-        /// <summary>
-        /// The dollar amount profit made if the bet wins.
-        /// </summary>
-        public decimal Profit { get; private set; }
-
-        /// <summary>
-        /// Total payout if bet wins.
-        /// </summary>
-        public decimal Payout { get; private set; }
-
-        /// <summary>
         /// Bet constructor. Ensures that the initial wager is $10.00. Initializes odds, 
         /// probability, profit, and payout.
         /// </summary>
         /// <param name="odds">The odds of this bet.</param>
-        public Bet(int odds)
+        public StraightBet(int odds)
         {
             // TODO
             // American odds cannot be -99 - 99
