@@ -45,7 +45,11 @@
     <Compile Include="Bet\StraightBet.cs" />
     <Compile Include="Bet\IBet.cs" />
     <Compile Include="Bet\Parlaybet.cs" />
+    <Compile Include="Game\NFLGame.cs" />
+    <Compile Include="Game\IGame.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Team\ITeam.cs" />
+    <Compile Include="Team\NFLTeam.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Exceptions\" />
