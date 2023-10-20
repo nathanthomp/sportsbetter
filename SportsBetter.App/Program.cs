@@ -8,6 +8,19 @@ namespace SportsBetter.App
     {
         static void Main(string[] args)
         {
+            /*
+             * Load data from a data source
+             */
+            List<StraightBet> bets = new List<StraightBet>();
+
+            /*
+             * Create the tree of bets
+             */
+
+
+
+
+
             const decimal totalWager = 100.00M;
             const int numberOfGames = 2; // Move to global scope
             int numberOfParlays = NumberOfParlays(numberOfGames); // Move to global scope
