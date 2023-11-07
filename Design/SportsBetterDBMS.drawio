@@ -1,0 +1,55 @@
+<mxfile host="Electron" modified="2023-11-02T02:38:23.836Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.8 Chrome/114.0.5735.289 Electron/25.5.0 Safari/537.36" etag="YACWMsPH3ax30drxoAVS" version="21.6.8" type="device" pages="4">
+  <diagram id="iyHO5-Gy-84ElNC_2fQB" name="Overview">
+    <mxGraphModel dx="1098" dy="988" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="4681" pageHeight="3300" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="JoJoPNFGJ9ELvlwDxrlo-1" value="Bet" style="whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="191" y="405" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="JoJoPNFGJ9ELvlwDxrlo-2" value="Team" style="whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="510" y="485" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="JoJoPNFGJ9ELvlwDxrlo-3" value="Game" style="whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="348" y="485" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="JoJoPNFGJ9ELvlwDxrlo-4" value="Wager" style="whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="348" y="405" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="JoJoPNFGJ9ELvlwDxrlo-5" value="Player" style="whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="672" y="485" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="FdxiI23OsVsO7kaTJEG6-2" value="&lt;h1&gt;Business Rules&lt;/h1&gt;&lt;p&gt;A game consists of two teams.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="56" y="54" width="337" height="211" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="tvCL7lXEDoPuax3GscjV" name="Normalization">
+    <mxGraphModel dx="1098" dy="988" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="4681" pageHeight="3300" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="itK0Kp0xYdZoyYQbXjHn-1" value="Wager_Id" style="whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="185" y="493" width="100" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="Crows" id="16GHEfI_oG4fKotHoHbm">
+    <mxGraphModel dx="1292" dy="1162" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="4681" pageHeight="3300" background="#FFFFFF" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="XMZ9ESZjgP_9XcTxOIGb" name="Chens">
+    <mxGraphModel dx="1098" dy="988" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="4681" pageHeight="3300" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
