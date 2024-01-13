@@ -1,23 +1,27 @@
-using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Mvc;
 
+[assembly: ApiController]
 var builder = WebApplication.CreateBuilder(args);
 
-// Use swagger
+builder.Services.AddControllers();
+
+// Swagger
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "SportsBetter API", Description = "Real-time Sports Data", Version = "v1" });
-});
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Use swagger
-app.UseSwagger();
-app.UseSwaggerUI(c =>
+// Swagger
+if (app.Environment.IsDevelopment())
 {
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "SportsBetter API V1");
-});
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
-app.MapGet("/", () => "SportsBetter default endpoint");
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
 
 app.Run();
