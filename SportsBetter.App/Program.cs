@@ -13,7 +13,8 @@ namespace SportsBetter.App
             /*
              * Load data from a data source
              */
-            List<NFLGame> games = GameParser.Parse(@"D:\nathanthomp\Programming\SportsBetter\Design\TestData.csv");
+            int currentNFLWeek = 10;
+            List<NFLGame> games = OddsAPI.GetNFLGames(currentNFLWeek);
 
             /*
              * Create a binary tree of bets
@@ -21,9 +22,8 @@ namespace SportsBetter.App
             // Take one game take one of the odds
             // Take the next game and 
 
-
             /*
-             * Create all the parlays
+             * Create all the parlays using depth first search.
              */
             List<Parlaybet> parlays = new List<Parlaybet>();
 
