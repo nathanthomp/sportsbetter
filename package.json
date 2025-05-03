@@ -7,6 +7,11 @@
     "run": "node dist/index.js"
   },
   "devDependencies": {
+    "@types/node": "^22.15.3",
     "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.799.0",
+    "@aws-sdk/lib-dynamodb": "^3.799.0"
   }
 }
