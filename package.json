@@ -1,0 +1,12 @@
+{
+  "name": "sportsbetter",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "compile": "npx tsc",
+    "run": "node dist/index.js"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}
