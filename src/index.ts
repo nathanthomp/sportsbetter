@@ -1,19 +1,28 @@
-import { getClient } from "./client"
+import { getClient } from "./client";
 import { ScanCommand } from "@aws-sdk/client-dynamodb";
 
-async function scanTable(tableName: string) {
-    const client = getClient();
-    const params = {
-        TableName: tableName,
-    };
+import { handle } from "./handler";
 
-    try {
-        const command = new ScanCommand(params);
-        const data = await client.send(command);
-        console.log("Scan succeeded:", data.Items);
-    } catch (error) {
-        console.error("Error scanning table:", error);
-    }
-}
+import { createMockDynamoDBStreamEvent } from "./mockdynamodbstreamevent";
 
-scanTable("OddsTable");
+// async function scanTable(tableName: string) {
+//     const client = getClient();
+//     const params = {
+//         TableName: tableName,
+//     };
+
+//     try {
+//         const command = new ScanCommand(params);
+//         const data = await client.send(command);
+//         console.log("Scan succeeded:", data.Items);
+//     } catch (error) {
+//         console.error("Error scanning table:", error);
+//     }
+// }
+
+// scanTable("OddsTable");
+
+// const mockEvent = createMockDynamoDBStreamEvent("INSERT");
+const mockEvent = createMockDynamoDBStreamEvent("MODIFY");
+// const mockEvent = createMockDynamoDBStreamEvent("REMOVE");
+handle(mockEvent);
