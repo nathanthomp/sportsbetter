@@ -1,9 +1,5 @@
-import { getClient } from "./client";
-import { ScanCommand } from "@aws-sdk/client-dynamodb";
-
-import { handle } from "./handler";
-
-import { createMockDynamoDBStreamEvent } from "./mockdynamodbstreamevent";
+import { handle } from "./handler/handler";
+import { createMockDynamoDBStreamEvent } from "./handler/mockdynamodbstreamevent";
 
 // async function scanTable(tableName: string) {
 //     const client = getClient();
@@ -22,7 +18,7 @@ import { createMockDynamoDBStreamEvent } from "./mockdynamodbstreamevent";
 
 // scanTable("OddsTable");
 
-// const mockEvent = createMockDynamoDBStreamEvent("INSERT");
-const mockEvent = createMockDynamoDBStreamEvent("MODIFY");
+const mockEvent = createMockDynamoDBStreamEvent("INSERT");
+// const mockEvent = createMockDynamoDBStreamEvent("MODIFY");
 // const mockEvent = createMockDynamoDBStreamEvent("REMOVE");
 handle(mockEvent);
