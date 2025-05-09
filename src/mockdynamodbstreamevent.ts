@@ -5,7 +5,7 @@ export function createMockDynamoDBStreamEvent(
 ): DynamoDBStreamEvent {
     switch (eventName) {
         case "INSERT":
-            return mockInsertEvent;
+            return mockInsertEventTotal;
         case "MODIFY":
             return mockMoifyEvent;
         case "REMOVE":
@@ -13,7 +13,7 @@ export function createMockDynamoDBStreamEvent(
     }
 }
 
-const mockInsertEvent: DynamoDBStreamEvent = {
+const mockInsertEventMoneyline: DynamoDBStreamEvent = {
     Records: [
         {
             eventID: "1234567890",
@@ -45,10 +45,63 @@ const mockInsertEvent: DynamoDBStreamEvent = {
                         S: "1",
                     },
                     PRICE: {
-                        N: "110",
+                        N: "225",
                     },
                     RESULT: {
                         S: "team1",
+                    },
+                    SPORTSBOOK: {
+                        S: "sportsbook1",
+                    },
+                    TTL: {
+                        S: "1746573132",
+                    },
+                },
+            },
+            eventSourceARN: "arn",
+        },
+    ],
+} as DynamoDBStreamEvent;
+
+const mockInsertEventTotal: DynamoDBStreamEvent = {
+    Records: [
+        {
+            eventID: "1234567890",
+            eventName: "INSERT",
+            eventVersion: "1.1",
+            eventSource: "aws:dynamodb",
+            awsRegion: "us-east-2",
+            dynamodb: {
+                ApproximateCreationDateTime: 123456,
+                SequenceNumber: "1234567890",
+                SizeBytes: 123,
+                StreamViewType: "NEW_AND_OLD_IMAGES",
+                Keys: {
+                    PK: {
+                        S: "LEAGUE#5#EVENT#698449988#OUTCOME#3",
+                    },
+                    SK: {
+                        S: "ODD#over#1.5#SPORTSBOOK1",
+                    },
+                },
+                NewImage: {
+                    EVENT: {
+                        S: "EVENT#698449988",
+                    },
+                    LEAGUE: {
+                        S: "LEAGUE#5",
+                    },
+                    MARKET: {
+                        N: "3",
+                    },
+                    PRICE: {
+                        N: "225",
+                    },
+                    RESULT: {
+                        S: "over",
+                    },
+                    POINTS: {
+                        S: "1.5",
                     },
                     SPORTSBOOK: {
                         S: "sportsbook1",

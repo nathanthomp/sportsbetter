@@ -1,5 +1,5 @@
-import { handle } from "./handler/handler";
-import { createMockDynamoDBStreamEvent } from "./handler/mockdynamodbstreamevent";
+import { handler } from "./handler/handler";
+import { createMockDynamoDBStreamEvent } from "./mockdynamodbstreamevent";
 
 // async function scanTable(tableName: string) {
 //     const client = getClient();
@@ -21,4 +21,4 @@ import { createMockDynamoDBStreamEvent } from "./handler/mockdynamodbstreamevent
 const mockEvent = createMockDynamoDBStreamEvent("INSERT");
 // const mockEvent = createMockDynamoDBStreamEvent("MODIFY");
 // const mockEvent = createMockDynamoDBStreamEvent("REMOVE");
-handle(mockEvent);
+handler(mockEvent);
